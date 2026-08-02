@@ -1,0 +1,1833 @@
+# Dragon Ball Z: The Legacy of Goku II (USA, ALFE, revision 0).
+
+[game]
+name = "Dragon Ball Z: The Legacy of Goku II"
+short_name = "dragon_ball_z_legacy_of_goku_ii"
+
+[program]
+name = "Dragon Ball Z: The Legacy of Goku II (USA)"
+id = "ALFE"
+load_address = 0x08000000
+size = 0x00800000
+entry_pc = 0x08000000
+speculative_literal_harvest = false
+aot_scan_start = 0x080000C0
+aot_scan_end = 0x08030000
+static_resume_all = true
+codegen_shards = 32
+
+[identity]
+sha1 = "18e0715dec419f3501c301511530d2edcd590f8b"
+md5 = "4e1565aa1f0627c2bf5e51019440cb70"
+
+[bios]
+path = "gbarecomp/bios/gba_bios.bin"
+sha1 = "300c20df6731a33952ded8c436f7f186d25d3492"
+hle = false
+
+[rom]
+path = "roms/dragon_ball_z_the_legacy_of_goku_ii_usa.gba"
+sha1 = "18e0715dec419f3501c301511530d2edcd590f8b"
+
+[save]
+type = "eeprom"
+size = 8192
+path = "saves/dragon_ball_z_the_legacy_of_goku_ii_usa.sav"
+
+[runtime]
+debug_port = 19888
+window_title = "DragonBallZLegacyofGokuIIRecomp"
+
+[video]
+screen = "frontlit"
+view_width = 240
+resize_view = false
+
+[audio]
+shadow = false
+
+# Startup installs this immutable ARM support/IRQ image at IWRAM base. A live
+# frame-300 dump matched ROM byte-for-byte through 0x03000E1B; the following
+# bytes are mutable state rather than copied code.
+[[code_copy]]
+runtime_start = 0x03000000
+source_start = 0x087FD6BC
+size = 0x00000E1C
+name = "iwram_support_code"
+note = "Exact live IWRAM/ROM match at frame 300 through offset 0xE1B"
+
+[[extra_func]]
+addr = 0x03000798
+source_addr = 0x087FDE54
+mode = "arm"
+note = "Address-taken IRQ callback inside the exact copied IWRAM image"
+
+[[extra_func]]
+addr = 0x03000824
+source_addr = 0x087FDEE0
+mode = "arm"
+note = "ARM IRQ dispatcher selected through the BIOS IRQ vector"
+
+[[extra_func]]
+addr = 0x03000934
+source_addr = 0x087FDFF0
+mode = "arm"
+resume = true
+note = "IRQ continuation immediately after the dispatcher's bx r0 callback"
+
+[[extra_func]]
+addr = 0x08000158
+mode = "thumb"
+note = "ARM startup LR target observed during standalone boot"
+
+[[extra_func]]
+addr = 0x0801F2B6
+mode = "thumb"
+note = "VBlank callback selected through the copied IWRAM dispatcher"
+
+[[extra_func]]
+addr = 0x08020BC8
+mode = "thumb"
+note = "Address-taken startup object callback"
+
+[[extra_func]]
+addr = 0x08020D70
+mode = "thumb"
+note = "Address-taken per-frame callback reached during startup"
+
+[[extra_func]]
+addr = 0x08026688
+mode = "thumb"
+note = "Address-taken object initializer reached from the constructor table"
+
+[[extra_func]]
+addr = 0x080266E0
+mode = "thumb"
+note = "Address-taken object callback observed during the title attract sequence"
+
+[[extra_func]]
+addr = 0x0801D3A4
+mode = "thumb"
+note = "Address-taken attract-scene callback observed during frame-600 coverage"
+
+[[extra_func]]
+addr = 0x0801D496
+mode = "thumb"
+note = "Per-frame attract-scene callback observed during frame-600 coverage"
+
+[[extra_func]]
+addr = 0x0801EDFA
+mode = "thumb"
+note = "Address-taken attract object callback observed during frame-600 coverage"
+
+[[extra_func]]
+addr = 0x0801EE7E
+mode = "thumb"
+note = "Per-frame attract object callback observed during frame-600 coverage"
+
+[[extra_func]]
+addr = 0x0801EEB2
+mode = "thumb"
+note = "Address-taken attract object callback observed during frame-600 coverage"
+
+[[extra_func]]
+addr = 0x0801F230
+mode = "thumb"
+note = "Per-frame VBlank object callback observed during frame-600 coverage"
+
+[[extra_func]]
+addr = 0x0801F9D4
+mode = "thumb"
+note = "Address-taken attract sprite callback observed during frame-600 coverage"
+
+[[extra_func]]
+addr = 0x080264E0
+mode = "thumb"
+note = "Address-taken object callback in the virtual callback slab"
+
+[[extra_func]]
+addr = 0x08026510
+mode = "thumb"
+note = "Address-taken object callback in the virtual callback slab"
+
+[[extra_func]]
+addr = 0x08026704
+mode = "thumb"
+note = "Address-taken object destructor callback"
+
+[[extra_func]]
+addr = 0x08026F34
+mode = "thumb"
+note = "Title animation callback observed during the extended attract sequence"
+
+[[extra_func]]
+addr = 0x080003FA
+mode = "thumb"
+note = "Title animation callback observed during the attract sequence"
+
+[[extra_func]]
+addr = 0x08000434
+mode = "thumb"
+note = "Title input object callback observed during the extended attract sequence"
+
+[[extra_func]]
+addr = 0x08000548
+mode = "thumb"
+note = "Title input-state callback observed during the extended attract sequence"
+
+[[extra_func]]
+addr = 0x0800055E
+mode = "thumb"
+note = "Title state-machine callback observed during the extended attract sequence"
+
+[[extra_func]]
+addr = 0x080005A4
+mode = "thumb"
+note = "Title teardown callback observed during the extended attract sequence"
+
+[[extra_func]]
+addr = 0x080005FA
+mode = "thumb"
+note = "Title display reset callback observed during the extended attract sequence"
+
+[[extra_func]]
+addr = 0x08000608
+mode = "thumb"
+note = "Title input sampling callback observed during the extended attract sequence"
+
+[[extra_func]]
+addr = 0x08000610
+mode = "thumb"
+note = "Title display-state callback observed during the extended attract sequence"
+
+[[extra_func]]
+addr = 0x08000BE4
+mode = "thumb"
+note = "Title object callback observed during the attract sequence"
+
+[[extra_func]]
+addr = 0x08000C18
+mode = "thumb"
+note = "Title object callback observed during the attract sequence"
+
+[[extra_func]]
+addr = 0x0801A39C
+mode = "thumb"
+note = "Address-taken attract-scene callback"
+
+[[extra_func]]
+addr = 0x0801A416
+mode = "thumb"
+note = "Per-frame attract-scene callback"
+
+[[extra_func]]
+addr = 0x0801ECF8
+mode = "thumb"
+note = "Address-taken attract sprite callback observed during the extended attract sequence"
+
+[[extra_func]]
+addr = 0x0801ED0C
+mode = "thumb"
+note = "Attract sprite callback"
+
+[[extra_func]]
+addr = 0x0801ED96
+mode = "thumb"
+note = "Thumb function-pointer target observed during the extended attract sequence"
+
+[[extra_func]]
+addr = 0x0801FFC8
+mode = "thumb"
+note = "Attract sprite mode callback"
+
+[[extra_func]]
+addr = 0x08020056
+mode = "thumb"
+note = "Attract sprite scaling callback"
+
+[[extra_func]]
+addr = 0x080204D4
+mode = "thumb"
+note = "Attract sprite initialization callback"
+
+[[extra_func]]
+addr = 0x08020FDC
+mode = "thumb"
+note = "Per-frame title scene callback observed during the extended attract sequence"
+
+[[extra_func]]
+addr = 0x080263C0
+mode = "thumb"
+note = "Address-taken destructor callback in the virtual callback slab"
+
+[[extra_func]]
+addr = 0x080263D8
+mode = "thumb"
+note = "Address-taken no-op callback in the virtual callback slab"
+
+[[extra_func]]
+addr = 0x080268F0
+mode = "thumb"
+note = "Thumb function-pointer target inside the title object callback"
+
+[[extra_func]]
+addr = 0x08026E0C
+mode = "thumb"
+note = "Address-taken title object callback observed during the extended attract sequence"
+
+# The deterministic standalone gameplay trace reaches these address-taken
+# callbacks while entering and fuzzing the Trunks tutorial. They are reviewed
+# Thumb dispatch targets; keeping the roots explicit makes strict-static
+# coverage reproducible without broad speculative pointer harvesting.
+
+[[extra_func]]
+addr = 0x0800084A
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080009F0
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08000AFE
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08000C9A
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800127C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080013EA
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08001462
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08001474
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08001938
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080040DC
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08004EA8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08004EDC
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800500E
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800503C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080050EE
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08005114
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08005152
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08005186
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800528A
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080052D2
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08005324
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08005468
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080055A4
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080056A0
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08005FC6
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08006024
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08006048
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080061A4
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080061AC
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080061B8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08006A18
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08006DD4
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08006E32
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08007298
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080072D2
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080072DE
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080072F4
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080072FA
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08007352
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080073FA
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08007444
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080074D4
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08007520
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08007554
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08007570
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08007650
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08007660
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800773C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800774A
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08007758
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08007F26
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08007F34
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080086E8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800873E
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08008766
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800877C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08008944
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08008B20
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08008B3C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08008B88
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08008EA8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08008F44
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08008F8E
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08008FA2
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800929A
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08009316
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08009384
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08009710
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800989E
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080098DC
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080098EE
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08009A88
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08009B1C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08009B34
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08009B92
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08009B94
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08009BA8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08009BBA
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08009BE4
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08009C8A
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08009CB8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08009D4A
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08009EFC
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08009F20
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800A65C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800A670
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800A67E
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800A6B4
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800A70A
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800A784
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800AB82
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800AC10
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800B2D6
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800B2DA
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800B2E8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800B316
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800B32E
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800B438
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800B448
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800B474
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800B596
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800B5D8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800B632
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800B710
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800B71C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800B734
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800B80C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800B82A
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800B84A
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800BA84
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800BACA
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800BAE4
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800BAF8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800BB42
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800BB62
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800BBC8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800C540
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800C5D4
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800C624
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800C65E
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800C8EA
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800C8F2
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800C920
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800C940
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800C96C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800C974
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800C988
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800C9A6
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800CAC4
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800CB42
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800D170
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800D23C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800D25A
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800D266
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800D590
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800D6A6
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800D6C8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800D764
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800D7D0
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800D7E0
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800D7EA
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800DE2C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800DE48
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800DFFC
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800E004
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800E076
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800EEBE
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800F060
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800F2B6
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800F3DA
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800FA06
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080108C0
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08016FD8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08017028
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08019B38
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08019C3A
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0801ED76
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08020534
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08020EC2
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08021424
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08026094
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0802609C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080260A4
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08026144
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080261CC
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080263A0
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080263B8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080263DC
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08026484
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08026488
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080264DC
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0802658C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080265A8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080265E8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0802662E
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0802665C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08026698
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0802675C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0802676A
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08026798
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08026830
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08026A6C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08026A7A
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08026AA8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08026ABE
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08026AC8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08026AD0
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08026B64
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08026B72
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08027508
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0802751C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080277D4
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080277E8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080279DC
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+# A second deterministic pass after rooting the initial gameplay graph exposed
+# these additional dynamic entries. They are part of the same reviewed trace.
+
+[[extra_func]]
+addr = 0x080003EA
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080006DC
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08001476
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080017F6
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800180C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08002B6C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08002D7E
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08004CAC
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08004CB6
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08004F00
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800561A
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080071FA
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08007772
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08007A84
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08008742
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08008BEE
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800B1D2
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800BBEE
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800BDC6
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800BFBE
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800BFEA
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800C9C4
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800C9FE
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800D74A
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800D9F8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800DDA6
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800DE6E
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800ECF8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800ED4E
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800F0CA
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800F0DA
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800F1AC
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080136A6
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080136F2
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08013C8E
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08013CDE
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0801A2C8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080264A8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080264F4
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0802650C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080265A4
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+# The strict replay and its diagnostic bridge also reached these two callbacks
+# before the bridge hit a non-returning scene loop.
+[[extra_func]]
+addr = 0x08000E22
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800D730
+mode = "thumb"
+note = "Runtime-observed scene-loop callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800910A
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080088BA
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800784C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800BE84
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800D7A0
+mode = "thumb"
+note = "Runtime-observed non-returning scene callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800BEB6
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+# Verbose discovery continued through the gameplay scene until the next
+# non-returning callback and exposed these additional dynamic entries.
+
+[[extra_func]]
+addr = 0x080264C0
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800BDB4
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080264B8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800DBAE
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800DBE2
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800DEBC
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800B436
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800DC08
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800DC38
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800CB46
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08026598
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08026498
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0802611C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08027D68
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0802731C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080131C4
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080131E0
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08014DF4
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08014E86
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08013D40
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08013C7E
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08007532
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08008030
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800EA3A
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080085A0
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800E19C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800E7C4
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800E7D8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800811E
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800E222
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080082C8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08007232
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08013750
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08013656
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800ECC6
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080119CC
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+# The next deterministic discovery pass exposed the remaining scene-specific
+# callbacks through its next non-returning entry.
+
+[[extra_func]]
+addr = 0x0800B9D6
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800B8A6
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08026BA4
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08026B78
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080278EC
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800B428
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08014DE0
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800E946
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080085AC
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800E210
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800F008
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800F9C6
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+# The completing discovery pass reached these final seven dynamic entries.
+
+[[extra_func]]
+addr = 0x0800ED96
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0801090A
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08010940
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08013778
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08020D90
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080270C8
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08027268
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+# The post-regeneration convergence pass exposed five final timing-sensitive
+# callback entries under the same deterministic replay.
+
+[[extra_func]]
+addr = 0x0800B75C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800D28C
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x0800EC82
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08026130
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08026EBC
+mode = "thumb"
+note = "Runtime-observed callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x08027530
+mode = "thumb"
+note = "Final timing-sensitive callback reached by the deterministic basic-gameplay trace"
+
+[[extra_func]]
+addr = 0x080085EC
+mode = "thumb"
+note = "Runtime-observed callback reached while reproducing the gameplay trace over TCP"
+
+# Startup walks this complete PC-relative constructor table. Its entries carry
+# the Thumb interworking bit; the recompiler normalizes it from target PCs.
+[[jump_table]]
+addr = 0x08023588
+stride = 4
+count = 69
+format = "pcrel_thumb"
+entries_mode = "thumb"
+name = "runtime_initializers"
+note = "Mechanically decoded constructor table through exclusive end 0x0802369C"
