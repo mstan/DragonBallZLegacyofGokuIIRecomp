@@ -1831,3 +1831,2068 @@ format = "pcrel_thumb"
 entries_mode = "thumb"
 name = "runtime_initializers"
 note = "Mechanically decoded constructor table through exclusive end 0x0802369C"
+
+# ---- Gameplay coverage additions (LoG II cheat sweep, 2026-10-17) ----
+# Dispatch misses from a timeboxed cheat sweep (new game, plateau, ruined city, Gohan house, menus)
+# under validation-only cheats. Each extra_func is a verified entry (push{..lr} /
+# STMFD prologue, BL target, or ROM code pointer). Each jump_table is a bounded run
+# of ROM code pointers whose members are all verified function starts.
+
+[[jump_table]]
+addr = 0x083B5C54
+stride = 4
+count = 6
+format = "abs32"
+entries_mode = "auto"
+note = "Verified ROM function-pointer table, 6 entries; reached in gameplay sweep"
+
+[[jump_table]]
+addr = 0x083EC84C
+stride = 4
+count = 6
+format = "abs32"
+entries_mode = "auto"
+note = "Verified ROM function-pointer table, 6 entries; reached in gameplay sweep"
+
+[[extra_func]]
+addr = 0x080026FE
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800273A
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (host of 1 observed interior resume point(s), 0 post-BL)"
+
+[[extra_func]]
+addr = 0x08002900
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08002928
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (bl-target)"
+
+[[extra_func]]
+addr = 0x08003426
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08003BCE
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08003BD6
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08004F32
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08004F76
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08004FCC
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08007470
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08007540
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800BED2
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800C232
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800C2C2
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800CB0E
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800D2C8
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800D5FE
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800D818
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0800D89C
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0800DC64
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800DD38
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800DF02
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0800DF4E
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0800DF60
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800DF74
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800DF98
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (bl-target)"
+
+[[extra_func]]
+addr = 0x0800DFEC
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0800E0B4
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800E10A
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800E142
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800E1BE
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800E25A
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800E7B4
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0800E7E6
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800E838
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800F9A2
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800FD92
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0800FFA0
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080100EC
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080107D4
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801083C
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08011896
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08011960
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080119F4
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08011A7C
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08011AA0
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08011AE2
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08011BA8
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08011CA8
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08011D0C
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080131F8
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (rom code pointer)"
+
+[[extra_func]]
+addr = 0x0801322C
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (rom code pointer)"
+
+[[extra_func]]
+addr = 0x080134F2
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (rom code pointer)"
+
+[[extra_func]]
+addr = 0x08016310
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080260A0
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080260D0
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08026120
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080263BC
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08026480
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08026500
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080265A0
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080269A0
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08026C24
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08026C6C
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08026CF8
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08026E44
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08026F48
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08026FB8
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08026FF0
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08027008
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0802706C
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08027098
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080270E0
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08027184
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08027378
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080273BC
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08027468
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080276A0
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080276B8
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080277FC
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080278A4
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08027980
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08027AA4
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08027AD0
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08027BE8
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08027E08
+mode = "thumb"
+note = "LoG II cheat sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0800CB00
+mode = "thumb"
+note = "LoG II cheat sweep miss, audited entry (leaf after literal data 0x80006180/0x40E02180, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080028EC
+mode = "thumb"
+note = "LoG II cheat sweep miss, audited entry (after literal pool 0x080E15B0/0x000005C4, no local branch to it)"
+
+# ---- Gameplay coverage additions (cheat sweep round 2, 2026-10-17) ----
+# Aborted-bridge entries and replay misses from re-driving the sweep milestone states
+# under validation-only cheats. Each extra_func is a verified entry (push{..lr} /
+# STMFD prologue, BL target, or ROM code pointer). Each jump_table is a bounded run
+# of ROM code pointers whose members are all verified function starts.
+
+[[extra_func]]
+addr = 0x08002962
+mode = "thumb"
+note = "cheat sweep round 2 miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08002A46
+mode = "thumb"
+note = "cheat sweep round 2 miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08002A5A
+mode = "thumb"
+note = "cheat sweep round 2 miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08002E70
+mode = "thumb"
+note = "cheat sweep round 2 miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08003B76
+mode = "thumb"
+note = "cheat sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08003B7E
+mode = "thumb"
+note = "cheat sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08003B90
+mode = "thumb"
+note = "cheat sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08003B94
+mode = "thumb"
+note = "cheat sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08003B98
+mode = "thumb"
+note = "cheat sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0800D8B8
+mode = "thumb"
+note = "cheat sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08026504
+mode = "thumb"
+note = "cheat sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08027034
+mode = "thumb"
+note = "cheat sweep round 2 miss, verified entry (push-lr prologue)"
+
+# ---- Gameplay coverage additions (LoG II sweep round 2, 2026-10-17) ----
+# Dispatch misses from sweep round 2 (house rooms, menus, EXP/level, Trunks plateau, Pepper Town)
+# under validation-only cheats. Each extra_func is a verified entry (push{..lr} /
+# STMFD prologue, BL target, or ROM code pointer). Each jump_table is a bounded run
+# of ROM code pointers whose members are all verified function starts.
+
+[[extra_func]]
+addr = 0x08002B30
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0800350A
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08003B44
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08003B72
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08003B9C
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08003BA6
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080043E8
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08004630
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0800463A
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08004700
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08004704
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08004708
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0800470C
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08004710
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08004714
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08004AEA
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08004B1C
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08004B30
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08004B34
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08004B38
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08004B42
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08004B46
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08004B4A
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08008580
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080088CA
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08008922
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (host of 1 observed interior resume point(s), 1 post-BL)"
+
+[[extra_func]]
+addr = 0x0800BEC4
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0800C1AC
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (host of 3 observed interior resume point(s), 3 post-BL)"
+
+[[extra_func]]
+addr = 0x0800C2A6
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (host of 1 observed interior resume point(s), 1 post-BL)"
+
+[[extra_func]]
+addr = 0x0800C882
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800C88A
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (host of 1 observed interior resume point(s), 1 post-BL)"
+
+[[extra_func]]
+addr = 0x0800C8BE
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800CB40
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0800D6B4
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0800D838
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (rom code pointer)"
+
+[[extra_func]]
+addr = 0x0800D8EA
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800E0F8
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0800E130
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (bl-target)"
+
+[[extra_func]]
+addr = 0x0800E7A0
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0801087A
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (rom code pointer)"
+
+[[extra_func]]
+addr = 0x0801087E
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (rom code pointer)"
+
+[[extra_func]]
+addr = 0x0802397C
+mode = "arm"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08023BAC
+mode = "arm"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08023CC0
+mode = "arm"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0802493C
+mode = "arm"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080251A0
+mode = "arm"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080260C0
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08026214
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080262D0
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080267F8
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08026918
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08026950
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080269B4
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080270B0
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08027358
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080273A8
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080274E8
+mode = "thumb"
+note = "LoG II sweep round 2 miss, verified entry (push-lr prologue)"
+
+# ---- Gameplay coverage additions (LoG II warp sweep, 2026-10-17) ----
+# Dispatch misses from the warp sweep (all 327 maps, late-game and flag-cleared saves, game over)
+# under validation-only cheats. Each extra_func is a verified entry (push{..lr} /
+# STMFD prologue, BL target, or ROM code pointer). Each jump_table is a bounded run
+# of ROM code pointers whose members are all verified function starts.
+
+[[extra_func]]
+addr = 0x08002ECA
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08003BB0
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08004030
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (host of 4 observed interior resume point(s), 4 post-BL)"
+
+[[extra_func]]
+addr = 0x08006528
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (bl-target)"
+
+[[extra_func]]
+addr = 0x0800678C
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080078A2
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08007CB6
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08007CDE
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08008330
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08008390
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080083C0
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080083C2
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08008564
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0800856E
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080085FC
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (host of 2 observed interior resume point(s), 2 post-BL)"
+
+[[extra_func]]
+addr = 0x08008660
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (host of 2 observed interior resume point(s), 2 post-BL)"
+
+[[extra_func]]
+addr = 0x08008806
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08008EFA
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080090FE
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (rom code pointer)"
+
+[[extra_func]]
+addr = 0x0800CA90
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0800CA9C
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800CB80
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800CFDC
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800D00E
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800D060
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800D092
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800D844
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (host of 1 observed interior resume point(s), 1 post-BL)"
+
+[[extra_func]]
+addr = 0x0800D86E
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0800D87E
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (rom code pointer)"
+
+[[extra_func]]
+addr = 0x0800D888
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (rom code pointer)"
+
+[[extra_func]]
+addr = 0x0800D93C
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (host of 4 observed interior resume point(s), 4 post-BL)"
+
+[[extra_func]]
+addr = 0x0800D9C2
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800DEA4
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0800E1DC
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800E33A
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800E484
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (host of 1 observed interior resume point(s), 1 post-BL)"
+
+[[extra_func]]
+addr = 0x0800E5A4
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800E5B8
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800E72A
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0800E754
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0800E77E
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800E80A
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800F3F0
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800FACE
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800FBAC
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0800FC2C
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0800FD3E
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0800FDE6
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08010038
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08010098
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08010118
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080101F6
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801021C
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08010276
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080103E0
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080103F0
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08010480
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801052C
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801055C
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08010628
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080106F8
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08010722
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08010730
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08010760
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (bl-target)"
+
+[[extra_func]]
+addr = 0x08010774
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08010884
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (rom code pointer)"
+
+[[extra_func]]
+addr = 0x0801088A
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (rom code pointer)"
+
+[[extra_func]]
+addr = 0x080109AC
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080109EC
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (host of 8 observed interior resume point(s), 8 post-BL)"
+
+[[extra_func]]
+addr = 0x08010AC6
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08011304
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08011328
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08011600
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080117C2
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08011DAC
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08011E1C
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08011F88
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (rom code pointer)"
+
+[[extra_func]]
+addr = 0x08012030
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08012694
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080126C4
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08012704
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08012710
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08012712
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08012714
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08012804
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08012832
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (host of 1 observed interior resume point(s), 0 post-BL)"
+
+[[extra_func]]
+addr = 0x08012840
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (rom code pointer)"
+
+[[extra_func]]
+addr = 0x08012874
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08012A04
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08012A28
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08012A50
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08012AD2
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08012AFE
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08012BC4
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08012C56
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08012CEE
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08012DE4
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08012E78
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0801306E
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08013112
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0801315C
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (rom code pointer)"
+
+[[extra_func]]
+addr = 0x08013178
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08013190
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (rom code pointer)"
+
+[[extra_func]]
+addr = 0x080131AC
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08013214
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08013260
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (rom code pointer)"
+
+[[extra_func]]
+addr = 0x0801327C
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080132F2
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (rom code pointer)"
+
+[[extra_func]]
+addr = 0x0801330E
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080133F0
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (rom code pointer)"
+
+[[extra_func]]
+addr = 0x0801340C
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08013424
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (rom code pointer)"
+
+[[extra_func]]
+addr = 0x08013440
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08013458
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (rom code pointer)"
+
+[[extra_func]]
+addr = 0x08013474
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801348C
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (rom code pointer)"
+
+[[extra_func]]
+addr = 0x080134A8
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080134C0
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801353C
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801358C
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08013892
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08013DAC
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08013DEE
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08013FDA
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08014204
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08014858
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08014868
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08014894
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08014CB6
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08014E98
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08015076
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08015078
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08015174
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08015176
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08015248
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08015328
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801539A
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08015466
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801553A
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08015564
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080155E4
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0801560E
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080156A8
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080156B6
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08015788
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801594C
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (host of 1 observed interior resume point(s), 0 post-BL)"
+
+[[extra_func]]
+addr = 0x08015C20
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08015C24
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08015C50
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08015FC2
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08016190
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08016262
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08016412
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801647A
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080164CC
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08016586
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801665C
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080166A2
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (host of 1 observed interior resume point(s), 1 post-BL)"
+
+[[extra_func]]
+addr = 0x0801684C
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08016A26
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (host of 1 observed interior resume point(s), 1 post-BL)"
+
+[[extra_func]]
+addr = 0x08016A5A
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08016F96
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080172B0
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08017306
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08017376
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08017392
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08017400
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08017802
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801781E
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08017E88
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08017EB2
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (host of 1 observed interior resume point(s), 0 post-BL)"
+
+[[extra_func]]
+addr = 0x0801827C
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801879C
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08018EBC
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080191CA
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801A10A
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801A1EE
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801A2B8
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0801A344
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801A59A
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0801A5A6
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0801A62A
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801A6A0
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801A6B2
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801C4FA
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0801CDFC
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801CE94
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801DE10
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801DF3C
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0801DFE4
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801E42A
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0801E42E
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0801E432
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801E518
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08022A52
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08026090
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080261E0
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080262D8
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08026394
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0802647C
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08026494
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080264AC
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080264B4
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080265DC
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (rom code pointer)"
+
+[[extra_func]]
+addr = 0x08026770
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08026784
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080267D0
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080267E4
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08026844
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080268B0
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08026978
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08026A80
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08026B28
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08026B50
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08026C94
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08026D70
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08026DAC
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08026E84
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08027020
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080271DC
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x0802722C
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08027390
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080273D0
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080273E4
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08027544
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x080275D0
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080276D0
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080277B0
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08027914
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08027950
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08027968
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x080279F0
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08027A2C
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08027AE4
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08027AF8
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08027B34
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08027B70
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08027C00
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08027C14
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08027C8C
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08027CE8
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08027CFC
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (start after terminator/literal pool, no local branch to it)"
+
+[[extra_func]]
+addr = 0x08027D10
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x08027D94
+mode = "thumb"
+note = "LoG II warp sweep miss, verified entry (push-lr prologue)"
+
+[[extra_func]]
+addr = 0x0801285C
+mode = "thumb"
+note = "LoG II warp sweep miss, audited entry (after a literal pool, no real branch to it)"
+
+[[extra_func]]
+addr = 0x08015EE0
+mode = "thumb"
+note = "LoG II warp sweep miss, audited entry (after a literal pool, no real branch to it)"
+
+[[extra_func]]
+addr = 0x08018154
+mode = "thumb"
+note = "LoG II warp sweep miss, audited entry (after a literal pool, no real branch to it)"
