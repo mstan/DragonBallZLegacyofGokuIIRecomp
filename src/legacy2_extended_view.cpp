@@ -478,8 +478,8 @@ bool field_content_x_bounds(
 int calculate_view_shift(gba::GbaBus* bus) {
     if (!bus) return 0;
     resolve_field_objects(bus);
-    int minimum = std::numeric_limits<int>::min();
-    int maximum = std::numeric_limits<int>::max();
+    int minimum = std::numeric_limits<int>::max();
+    int maximum = std::numeric_limits<int>::min();
     bool constrained = false;
     for (int bg = 0; bg < 4; ++bg) {
         const std::uint32_t object = g_field_objects[bg];
@@ -490,10 +490,13 @@ int calculate_view_shift(gba::GbaBus* bus) {
             continue;
         }
         const int scroll = layer_scroll_x(bus, bg);
-        minimum = std::max(
+        // Layers compose one scene. Sparse foregrounds and overlay resources
+        // must not restrict the view to the intersection of their occupied
+        // columns: that pins the whole scene while the native camera moves.
+        minimum = std::min(
             minimum, static_cast<int>(g_ws_extra_left) +
                 content_min - scroll);
-        maximum = std::min(
+        maximum = std::max(
             maximum, content_max - scroll - 240 -
                 static_cast<int>(g_ws_extra_right));
         constrained = true;
@@ -536,18 +539,24 @@ extern "C" int legacy2_tilemap_provider(
 
 extern "C" int legacy2_obj_x_provider(
     int oam_index, std::uint16_t attr0, std::uint16_t attr1,
-    std::uint16_t, int* out_x) {
+    std::uint16_t attr2, int* out_x) {
     gba::GbaBus* bus = active_bus();
     if (!out_x || !is_overworld(bus)) return 0;
 
     const int x = attr1 & 0x1FFu;
     const int y = attr0 & 0xFFu;
 
-    // Gameplay reserves slots 0..2 for the top-left health/energy group.
-    // Slot 3 is already the player, so the slot and position guards are both
-    // required to keep world actors camera-relative.
-    if (oam_index >= 0 && oam_index <= 2 && x < 96 && y < 32) {
-        *out_x = x - static_cast<int>(g_ws_extra_left);
+    // OAM allocation changes when the area-name banner disappears: health
+    // moves from slots 8..10 to 0..2, and actors follow immediately. Identify
+    // these reserved screen graphics by their tiles and positions instead of
+    // treating the first eleven slots as overlays.
+    const unsigned tile = attr2 & 0x03FFu;
+    const bool health = x < 96 && y < 32 &&
+        (tile == 0x268u || tile == 0x278u || tile == 0x280u);
+    const bool area_name = y >= 112 && y <= 160 &&
+        tile >= 0x1F0u && tile <= 0x260u;
+    if (health || area_name) {
+        *out_x = health ? x - static_cast<int>(g_ws_extra_left) : x;
         return 1;
     }
 
