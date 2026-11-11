@@ -13,6 +13,7 @@ param(
     [Parameter(Mandatory = $true)][string]$Version,
     [string]$BuildDir = 'build-release',
     [string]$GbarecompRoot = '',
+    [string]$RecompUiRoot = '',
     [ValidateRange(1, 32)][int]$Jobs = 4
 )
 
@@ -27,6 +28,8 @@ $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $root = (Resolve-Path (Join-Path $scriptDir '..')).Path
 if (-not $GbarecompRoot) { $GbarecompRoot = Join-Path $root 'gbarecomp' }
 $engine = (Resolve-Path $GbarecompRoot).Path
+if (-not $RecompUiRoot) { $RecompUiRoot = Join-Path $root 'recomp-ui' }
+$ui = (Resolve-Path $RecompUiRoot).Path
 $build = Join-Path $root $BuildDir
 $out = Join-Path $root 'release-stage'
 $target = 'DragonBallZLegacyofGokuIIRecomp'
@@ -69,6 +72,9 @@ New-Item -ItemType Directory -Force -Path $out | Out-Null
     -DCMAKE_BUILD_TYPE=Release `
     "-DCMAKE_CXX_FLAGS_RELEASE=-O1 -DNDEBUG" `
     -DGBARECOMP_ROOT="$engine" `
+    -DGBARECOMP_RUNTIME_UI_ROOT="$ui" `
+    -DRECOMP_UI_ROOT="$ui" `
+    -DGBARECOMP_GAME_VERSION="$Version" `
     -DGBARECOMP_BUILD_ORACLE=OFF `
     -DGBARECOMP_MINGW_PREFIX_UNIX='/c/msys64/mingw64' `
     -DSDL2_INCLUDE_DIR='C:/msys64/mingw64/include/SDL2' `
@@ -89,7 +95,10 @@ if (Test-Path -LiteralPath $stage) {
     if (-not $resolvedStage.StartsWith("$resolvedOut\", [System.StringComparison]::OrdinalIgnoreCase)) {
         throw "Refusing to remove stage outside release output: $resolvedStage"
     }
-    Remove-Item -LiteralPath $resolvedStage -Recurse -Force
+    if (Get-ChildItem -LiteralPath $resolvedStage -Recurse -Attributes ReparsePoint) {
+        throw "Unexpected reparse point in release stage"
+    }
+    Remove-Item -LiteralPath $resolvedStage -Recurse -ErrorAction Stop
 }
 New-Item -ItemType Directory -Force -Path $stage | Out-Null
 Copy-Item -LiteralPath $exe -Destination $stage
@@ -132,7 +141,8 @@ It has no affiliation with or endorsement from the game publisher.
 3. Select your legally obtained $gameTitle (USA) ROM.
    Expected SHA-1: $expectedSha1
 4. Select your legally obtained retail gba_bios.bin under Settings > System.
-5. Open Mods to opt into Adaptive Widescreen, then select PLAY.
+5. Select PLAY. Adaptive Widescreen starts enabled with Fit to screen.
+   Existing saved aspect and mod choices remain in effect after an update.
 
 Display, audio, input, and enhancement settings persist locally. Keyboard
 defaults: arrows = D-pad, Z = A, X = B, Enter = Start, Backspace = Select,
@@ -152,7 +162,8 @@ $forbidden = Get-ChildItem -LiteralPath $stage -Recurse -File | Where-Object {
         '.flash', '.state', '.json', '.log', '.apk') -or
     $relative -match '(^|\\)(generated|recomp_cache)(\\|$)' -or
     ($_.Extension -in @('.cpp', '.c', '.h') -and
-        $relative -notmatch '^overlay_toolchain\\') -or
+        $relative -notmatch '^overlay_toolchain\\' -and
+        $relative -ne 'external\arm-recomp-core\profiles\armv4t_gba\runtime_arm_types.h') -or
     $_.Name -ieq 'gba_bios.bin' -or
     $_.Name -in @('game.toml', 'rom.cfg', 'bios.cfg', 'config.ini',
         'keybinds.ini', 'mods.ini', 'state.toml')
@@ -161,7 +172,7 @@ if ($forbidden) {
     throw "Forbidden release content detected: $($forbidden.FullName -join ', ')"
 }
 
-if (Test-Path -LiteralPath $zip) { Remove-Item -LiteralPath $zip -Force }
+if (Test-Path -LiteralPath $zip) { Remove-Item -LiteralPath $zip -ErrorAction Stop }
 Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
