@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
-project(DragonBallZLegacyofGokuIIRecomp C CXX)
+project(DragonBallZLegacyofGokuIIRecomp VERSION 0.0.4 LANGUAGES C CXX)
+set(GBARECOMP_GAME_VERSION "${PROJECT_VERSION}" CACHE STRING "Player-visible game build version")
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 20)
@@ -59,6 +60,7 @@ target_link_libraries(DragonBallZLegacyofGokuIIRecomp PRIVATE
     "-Wl,--end-group")
 
 target_compile_definitions(DragonBallZLegacyofGokuIIRecomp PRIVATE
+    GBARECOMP_GAME_VERSION="${GBARECOMP_GAME_VERSION}"
     GBARECOMP_DEFAULT_DEBUG_PORT=19888
     GBARECOMP_WINDOW_TITLE="DragonBallZLegacyofGokuIIRecomp"
     GBARECOMP_DEFAULT_GAME_CONFIG="game.toml")
@@ -89,6 +91,10 @@ endif()
 
 set(LEGACY2_PRELOADED_MODS "${CMAKE_CURRENT_SOURCE_DIR}/mods/preloaded")
 if(EXISTS "${LEGACY2_PRELOADED_MODS}/packages")
+    file(GLOB_RECURSE LEGACY2_MOD_MANIFESTS CONFIGURE_DEPENDS
+        "${LEGACY2_PRELOADED_MODS}/packages/*.toml")
+    set_property(TARGET DragonBallZLegacyofGokuIIRecomp APPEND PROPERTY
+        LINK_DEPENDS ${LEGACY2_MOD_MANIFESTS})
     add_custom_command(TARGET DragonBallZLegacyofGokuIIRecomp POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
             "${LEGACY2_PRELOADED_MODS}"

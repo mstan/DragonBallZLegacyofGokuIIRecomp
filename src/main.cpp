@@ -42,6 +42,7 @@ int main(int argc, char** argv) {
     opts.launcher_expose_widescreen = false;
     opts.launcher_expose_adaptive_view = false;
     opts.launcher_region = "USA";
+    opts.launcher_game_version = GBARECOMP_GAME_VERSION;
     opts.launcher_game_config = "game.toml";
 
 #if defined(GBAGAME_RECOMP_UI)
