@@ -3896,3 +3896,27 @@ note = "LoG II warp sweep miss, audited entry (after a literal pool, no real bra
 addr = 0x08018154
 mode = "thumb"
 note = "LoG II warp sweep miss, audited entry (after a literal pool, no real branch to it)"
+
+# Field object methods reached by the native Continue/loading path.
+# These are distinct Thumb entries with bounded return paths; the 0x08025BC0
+# relative vtable supplies CCFA, CD20 and CD92. CD46 follows CD44 return.
+
+[[extra_func]]
+addr = 0x0800CCFA
+mode = "thumb"
+note = "Field-object method reached by native save loading; verified function boundary"
+
+[[extra_func]]
+addr = 0x0800CD20
+mode = "thumb"
+note = "Field-object method reached by native save loading; verified function boundary"
+
+[[extra_func]]
+addr = 0x0800CD46
+mode = "thumb"
+note = "Field-object method reached by native save loading; verified function boundary"
+
+[[extra_func]]
+addr = 0x0800CD92
+mode = "thumb"
+note = "Field-object method reached by native save loading; verified function boundary"

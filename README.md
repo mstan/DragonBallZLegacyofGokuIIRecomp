@@ -123,3 +123,7 @@ distributed by this project. Launcher box art is included for identification.
 
 Part of the **R.A.I.D. — Retro AI Development** static-recompilation
 community.
+
+Gameplay recording is available in **Mods ? Gameplay Diagnostics ? Record Gameplay**. It starts enabled and remembers your on/off choice independently of Adaptive Widescreen.
+
+The authored-field regression can be run separately with `cmake -S tests -B build-view-tests`, `cmake --build build-view-tests`, and `ctest --test-dir build-view-tests --output-on-failure`. It checks absent layers, frame/state restore invalidation, live native chunk writes and the shared row/tile sampler contract using synthetic data.

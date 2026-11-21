@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(DragonBallZLegacyofGokuIIRecomp VERSION 0.0.5 LANGUAGES C CXX)
+project(DragonBallZLegacyofGokuIIRecomp VERSION 0.0.6 LANGUAGES C CXX)
 set(GBARECOMP_GAME_VERSION "${PROJECT_VERSION}" CACHE STRING "Player-visible game build version")
 
 set(CMAKE_C_STANDARD 11)
@@ -19,6 +19,8 @@ set(RECOMP_UI_ROOT "${GBARECOMP_RUNTIME_UI_ROOT}"
     CACHE PATH "Path to the shared recomp-ui checkout")
 set(GBARECOMP_ENABLE_MODS ON CACHE BOOL
     "Enable the built-in Legacy of Goku II mod catalog" FORCE)
+option(GBARECOMP_ORDERED_SCANLINE_EXPERIMENT
+    "Use the shared read-only authored-field tile jobs" ON)
 
 add_subdirectory("${GBARECOMP_ROOT}" gbarecomp_build EXCLUDE_FROM_ALL)
 
