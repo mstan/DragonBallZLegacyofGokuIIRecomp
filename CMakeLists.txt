@@ -19,6 +19,8 @@ set(RECOMP_UI_ROOT "${GBARECOMP_RUNTIME_UI_ROOT}"
     CACHE PATH "Path to the shared recomp-ui checkout")
 set(GBARECOMP_ENABLE_MODS ON CACHE BOOL
     "Enable the built-in Legacy of Goku II mod catalog" FORCE)
+option(GBARECOMP_ORDERED_SCANLINE_EXPERIMENT
+    "Use the shared read-only authored-field tile jobs" ON)
 
 add_subdirectory("${GBARECOMP_ROOT}" gbarecomp_build EXCLUDE_FROM_ALL)
 
