@@ -6,6 +6,7 @@
 #include <cstdio>
 #include <limits>
 #include <unordered_map>
+#include <unordered_set>
 #include <utility>
 
 #include "gba_bus.h"
@@ -33,9 +34,26 @@ std::uint32_t g_field_objects[4] = {};
 std::unordered_map<
     std::uint32_t, std::array<std::uint8_t, kFieldChunkBytes>>
     g_decoded_chunks;
+std::unordered_set<std::uint32_t> g_failed_chunks;
 std::unordered_map<std::uint32_t, std::pair<int, int>>
     g_content_x_bounds;
-int g_render_view_shift = 0;
+struct FieldEpoch {
+    gba::GbaBus* bus = nullptr;
+    std::uint64_t frame = 0;
+    unsigned long long state = 0;
+    std::uint32_t map = 0;
+    bool valid = false;
+} g_field_epoch;
+
+struct FramingInputs {
+    std::array<std::uint32_t, 4> resources{};
+    std::array<int, 4> scroll{};
+    unsigned left = 0, right = 0;
+    bool operator==(const FramingInputs&) const = default;
+};
+FramingInputs g_framing_inputs;
+bool g_framing_valid = false;
+int g_framing_shift = 0;
 
 gba::GbaBus* active_bus() {
     return gbarecomp::active_bus();
@@ -259,10 +277,14 @@ const std::uint8_t* decoded_field_chunk(
     const auto found = g_decoded_chunks.find(descriptor);
     if (found != g_decoded_chunks.end())
         return found->second.data();
+    if (g_failed_chunks.contains(descriptor))
+        return nullptr;
 
     std::array<std::uint8_t, kFieldChunkBytes> decoded{};
-    if (!decode_field_chunk(bus, descriptor, &decoded))
+    if (!decode_field_chunk(bus, descriptor, &decoded)) {
+        g_failed_chunks.insert(descriptor);
         return nullptr;
+    }
     const auto inserted =
         g_decoded_chunks.emplace(descriptor, std::move(decoded));
     return inserted.first->second.data();
@@ -310,10 +332,27 @@ bool field_object_valid(
 }
 
 void resolve_field_objects(gba::GbaBus* bus) {
+    if (!bus) return;
+    const auto* ppu = gbarecomp::active_ppu();
+    const std::uint64_t frame = ppu ? ppu->frame_count() : g_runtime_vblank_starts;
+    const std::uint8_t* map_bytes = bus->iwram_ptr() + 0x2084u;
+    const std::uint32_t map = static_cast<std::uint32_t>(map_bytes[0]) |
+        (static_cast<std::uint32_t>(map_bytes[1]) << 8) |
+        (static_cast<std::uint32_t>(map_bytes[2]) << 16) |
+        (static_cast<std::uint32_t>(map_bytes[3]) << 24);
+    if (g_field_epoch.valid && g_field_epoch.bus == bus &&
+        g_field_epoch.frame == frame && g_field_epoch.state == g_runtime_state_epoch &&
+        g_field_epoch.map == map) {
+        return;
+    }
+    const bool same_scene = g_field_epoch.valid && g_field_epoch.bus == bus &&
+        g_field_epoch.state == g_runtime_state_epoch && g_field_epoch.map == map;
+    g_field_epoch = {bus, frame, g_runtime_state_epoch, map, true};
+    g_framing_valid = false;
     bool current = true;
     for (int layer = 0; layer < 4; ++layer)
         current &= field_object_valid(bus, g_field_objects[layer], layer);
-    if (current) return;
+    if (same_scene && current) return;
 
     for (std::uint32_t& object : g_field_objects)
         object = 0u;
@@ -426,7 +465,7 @@ bool field_content_x_bounds(
     if (cached != g_content_x_bounds.end()) {
         *out_min_x = cached->second.first;
         *out_max_x = cached->second.second;
-        return true;
+        return cached->second.first < cached->second.second;
     }
 
     const unsigned chunk_columns = mem8(bus, resource + 0x14u);
@@ -464,8 +503,12 @@ bool field_content_x_bounds(
             }
         }
     }
-    if (maximum_tile < minimum_tile)
+    if (maximum_tile < minimum_tile) {
+        // Empty/unsupported immutable resources are also complete results.
+        // Retrying their whole plane for every actor or tile cannot add data.
+        g_content_x_bounds.emplace(resource, std::pair<int, int>{0, 0});
         return false;
+    }
 
     const std::pair<int, int> bounds{
         minimum_tile * 8, (maximum_tile + 1) * 8};
@@ -478,6 +521,15 @@ bool field_content_x_bounds(
 int calculate_view_shift(gba::GbaBus* bus) {
     if (!bus) return 0;
     resolve_field_objects(bus);
+    FramingInputs inputs;
+    inputs.left = g_ws_extra_left;
+    inputs.right = g_ws_extra_right;
+    for (int bg = 0; bg < 4; ++bg) {
+        inputs.resources[bg] = ewram32(bus, g_field_objects[bg] + 0x10u);
+        inputs.scroll[bg] = layer_scroll_x(bus, bg);
+    }
+    if (g_framing_valid && inputs == g_framing_inputs)
+        return g_framing_shift;
     int minimum = std::numeric_limits<int>::max();
     int maximum = std::numeric_limits<int>::min();
     bool constrained = false;
@@ -489,7 +541,7 @@ int calculate_view_shift(gba::GbaBus* bus) {
                 bus, object, &content_min, &content_max)) {
             continue;
         }
-        const int scroll = layer_scroll_x(bus, bg);
+        const int scroll = inputs.scroll[bg];
         // Layers compose one scene. Sparse foregrounds and overlay resources
         // must not restrict the view to the intersection of their occupied
         // columns: that pins the whole scene while the native camera moves.
@@ -501,14 +553,17 @@ int calculate_view_shift(gba::GbaBus* bus) {
                 static_cast<int>(g_ws_extra_right));
         constrained = true;
     }
-    if (!constrained)
-        return 0;
-    if (minimum <= maximum) {
-        if (minimum > 0) return minimum;
-        if (maximum < 0) return maximum;
-        return 0;
+    int shift = 0;
+    if (constrained) {
+        if (minimum <= maximum) {
+            if (minimum > 0) shift = minimum;
+            else if (maximum < 0) shift = maximum;
+        } else shift = minimum + (maximum - minimum) / 2;
     }
-    return minimum + (maximum - minimum) / 2;
+    g_framing_inputs = inputs;
+    g_framing_shift = shift;
+    g_framing_valid = true;
+    return shift;
 }
 
 extern "C" int legacy2_bg_x_provider(
@@ -519,13 +574,27 @@ extern "C" int legacy2_bg_x_provider(
 
     const int hardware_x =
         output_x - static_cast<int>(g_ws_extra_left);
-    if (bg == 3 && output_x == 0 && screen_y == 0)
-        g_render_view_shift = calculate_view_shift(bus);
-    if (g_render_view_shift == 0)
+    const int shift = calculate_view_shift(bus);
+    if (shift == 0)
         return 0;
-    *out_hardware_x = hardware_x + g_render_view_shift;
+    *out_hardware_x = hardware_x + shift;
     return 1;
 }
+
+#if defined(GBARECOMP_WIDE_BG_SAMPLER_API)
+int legacy2_bg_x_row_provider(int bg, int screen_y, int out_width,
+                             int native_left, gba::WsBgXSpan* spans, int capacity) {
+    if (!spans || capacity < 1 || out_width <= 0 || bg < 0 || bg > 3)
+        return 0;
+    gba::GbaBus* bus = active_bus();
+    // A fresh picture must also see a same-frame restore/re-render. Any first
+    // BG row can prepare it; BG3 is not required to exist or be sampled.
+    if (screen_y == 0) g_field_epoch.valid = false;
+    const int shift = is_overworld(bus) ? calculate_view_shift(bus) : 0;
+    spans[0] = {0, out_width, -native_left + shift, 1, shift ? 1 : 0};
+    return 1;
+}
+#endif
 
 extern "C" int legacy2_tilemap_provider(
     int bg, int hardware_x, int screen_y, std::uint16_t* out_entry) {
@@ -562,7 +631,7 @@ extern "C" int legacy2_obj_x_provider(
 
     // Preserve positive authored positions in the new right margin while
     // retaining the hardware's wrapped representation for off-left objects.
-    const int view_shift = g_render_view_shift;
+    const int view_shift = calculate_view_shift(bus);
     const int widened_right = 240 +
         static_cast<int>(g_ws_extra_right) + view_shift;
     const int world_x = x <= widened_right ? x : x - 512;
@@ -608,8 +677,10 @@ void install_extended_view(std::uint32_t, std::uint32_t) {
     for (std::uint32_t& object : g_field_objects)
         object = 0u;
     g_decoded_chunks.clear();
+    g_failed_chunks.clear();
     g_content_x_bounds.clear();
-    g_render_view_shift = 0;
+    g_field_epoch = {};
+    g_framing_valid = false;
     gba::g_ws_tilemap_provider = &legacy2_tilemap_provider;
     gba::g_ws_authored_margin_layers = 1;
     gba::g_ws_bg_x_provider = &legacy2_bg_x_provider;
@@ -617,6 +688,12 @@ void install_extended_view(std::uint32_t, std::uint32_t) {
         (1u << 0) | (1u << 1) | (1u << 2) | (1u << 3);
     gba::g_ws_obj_attr_x_provider = &legacy2_obj_x_provider;
     g_runtime_bus_read_override = &legacy2_bus_read_override;
+#if defined(GBARECOMP_WIDE_BG_SAMPLER_API)
+    // Mapping is affine within a row and authored entries are constant inside
+    // an unwrapped 8x8 cell. The shared engine owns tile-span preparation and
+    // occlusion; no sampler mutates guest state or depends on callback count.
+    gba::publish_read_only_wide_bg_providers(&legacy2_bg_x_row_provider, true);
+#endif
     std::fprintf(stderr,
         "[legacy2:view] authored BG0..BG3 chunk resources + adaptive boundary "
         "framing + edge HUD + expanded actor visibility enabled\n");
